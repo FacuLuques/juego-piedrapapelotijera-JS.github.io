@@ -1,5 +1,7 @@
 let puntosUsuario = 0
 let puntosCpu = 0
+let partidasGanadas = 0
+let partidasPerdidas = 0
 
 let instrucciones = document.querySelector("#instrucciones")
 let contenedorPuntosUsuario = document.querySelector("#puntos-usuario")
@@ -17,7 +19,7 @@ botonesArmas.forEach(boton => {
 })
 
 function iniciarTurno(e) {
-    
+
     let eleccionCpu = Math.floor(Math.random() * 3);
     let eleccionUsuario = e.currentTarget.id;
 
@@ -33,10 +35,6 @@ function iniciarTurno(e) {
         eleccionCpu = "tijera✌"
     }
 
-    //piedra vence tijera
-    //tijera vence papel
-    //papel vence piedra
-    //si son iguales es empate
 
     if (
        (eleccionUsuario ===  "piedra✊" && eleccionCpu === "tijera✌") || 
@@ -61,19 +59,44 @@ function iniciarTurno(e) {
     if (puntosUsuario === 5 || puntosCpu === 5) {
         
         if (puntosUsuario === 5) {
-            instrucciones.innerText = " ⭐¡Ganaste el juego!⭐"
+            Swal.fire(
+                '⭐¡Ganaste la partida!⭐',
+                'Asi se hace 😎',
+                'success'
+              )
+            //LOCAL STORAGE
+            localStorage.setItem("partidasGanadas", JSON.stringify(partidasGanadas));
         }
 
         if (puntosCpu === 5) {
-            instrucciones.innerText = " 🤖¡Perdiste!🤖"
+            Swal.fire(
+                '🤖¡Perdiste!🤖',
+                '¡Las CPU gobernaran el mundo!😥',
+                'error'
+              )
+            //LOCAL STORAGE
+            localStorage.setItem("partidasPerdidas", JSON.stringify(partidasPerdidas));
         }
 
         elegituArma.classList.add("disabled")
         reiniciar.classList.remove("disabled")
         reiniciar.addEventListener("click", reiniciarJuego)
     }
-
 }
+
+///////////LOCAL STORAGE
+if(localStorage.getItem("partidasGanadas")) {
+    partidasGanadas++
+    partidasGanadas = JSON.parse(localStorage.getItem("partidasGanadas"));
+}
+if(localStorage.getItem("partidasPerdidas")) {
+    partidasPerdidas++
+    partidasPerdidas = JSON.parse(localStorage.getItem("partidasPerdidas"));
+}
+///////////
+
+
+
 
     function ganaUsuario() {
         puntosUsuario++;
