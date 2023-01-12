@@ -93,7 +93,7 @@ if(localStorage.getItem("partidasPerdidas")) {
     partidasPerdidas++
     partidasPerdidas = JSON.parse(localStorage.getItem("partidasPerdidas"));
 }
-///////////
+////////////
 
 
 

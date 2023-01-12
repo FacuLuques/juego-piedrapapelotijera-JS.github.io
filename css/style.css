@@ -14,7 +14,7 @@
     --color-tres: #393E41;
     --color-cuatro: #22538b;
 }
-
+/**************************************/
 body {
     background-color: var(--color-tres);
     color: var(--color-uno);
